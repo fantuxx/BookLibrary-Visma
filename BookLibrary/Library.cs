@@ -15,33 +15,27 @@ namespace BookLibrary
             AllBooks = new List<Book>();
             Users = new List<User>();
         }
+
         public List<Book> AllBooks { get; set; }
         public List<User> Users { get; private set; }
 
-        public List<Book> FilterByIsbn(string isbn )//filter-isb
+        public List<Book> FilterByIsbn(string isbn) //filter-isb
         {
-            var result = 
-                from book in AllBooks 
-                where book.ISBN == isbn 
-                select book;
-            List < Book > byISBN = result.ToList();
+            var result = from book in AllBooks where book.ISBN == isbn select book;
+            List<Book> byISBN = result.ToList();
             return byISBN;
         }
+
         public List<Book> FilterByName(string name) //filter-nam
         {
-            var result =
-                from book in AllBooks
-                where book.Name == name
-                select book;
+            var result = from book in AllBooks where book.Name == name select book;
             List<Book> byName = result.ToList();
             return byName;
         }
-        public List<Book> FilterByAuthor(string author)//filter -aut
+
+        public List<Book> FilterByAuthor(string author) //filter -aut
         {
-            var result =
-                from book in AllBooks
-                where book.Author == author
-                select book;
+            var result = from book in AllBooks where book.Author == author select book;
             List<Book> byAuthor = result.ToList();
             return byAuthor;
         }
@@ -62,26 +56,24 @@ namespace BookLibrary
 
         public void DisplayAllBooks()
         {
-            foreach (var book in  AllBooks )
+            foreach (var book in AllBooks)
             {
                 if (book.IsAvailable)
                 {
                     Console.WriteLine("Name: {0}, Author: {1}, ISBN: {2}.", book.Name, book.Author, book.ISBN);
                 }
-                
             }
         }
 
         public Book FindBookByName(string name)
         {
-
             Book b = AllBooks.Find(c => c.Name.ToUpper().StartsWith(name.ToUpper()));
             return b;
         }
 
         public bool IsBookFound(string name)
         {
-            if (name.Length >3) //at least 3 chars
+            if (name.Length > 3) //at least 3 chars
             {
                 var book = AllBooks.Find(c => c.Name.ToUpper().StartsWith(name.ToUpper()));
                 if (book != null)
@@ -95,18 +87,15 @@ namespace BookLibrary
             }
             else
             {
-                
                 return false;
             }
-            
-
         }
 
-        public void ReturnBook(string  bookName, User user )
+        public void ReturnBook(string bookName, User user)
         {
-            if (user.TakenBooks.Count ==0)
+            if (user.TakenBooks.Count == 0)
             {
-                Console.WriteLine("Looks like there is nothing to return buddy");   
+                Console.WriteLine("Looks like there is nothing to return buddy");
             }
             else
             {
@@ -122,7 +111,6 @@ namespace BookLibrary
 
                     Console.WriteLine("Returned succsesfuly");
                     Console.WriteLine();
-
                 }
                 else
                 {
@@ -133,13 +121,12 @@ namespace BookLibrary
 
         public void TakeBook(User user, string bookName, DateTime howLong)
         {
-
             if (IsBookFound(bookName)) //if the specified book is in the book list
             {
                 var book = FindBookByName(bookName);
                 Console.WriteLine("Attempting to take a book: " + book.Name);
                 Console.WriteLine();
-                if (user.TakenBooks.Contains(book) || user.TakenBooks.Count >=3)
+                if (user.TakenBooks.Contains(book) || user.TakenBooks.Count >= 3)
                 {
                     Console.WriteLine("looks like you have this book or you reached maximum limit of 3 books");
                     Console.WriteLine();
@@ -184,7 +171,6 @@ namespace BookLibrary
                 Console.WriteLine("Sorry couldn't find that book. Be more clear");
             }
         }
-
 
         public void DisplayBooks(List<Book> books)
         {

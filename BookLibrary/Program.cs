@@ -11,10 +11,11 @@ namespace BookLibrary
         {
             var loader = new LoadJson<Book>();
             var library = new Library();
-            library.AllBooks = loader.LoadFromFile("books.json");
-
+            library.AllBooks = loader.LoadFromFile("books.json");//populating with data //Might wanna change for your suit
             string name;
             string lastName;
+
+
 
             Console.WriteLine("*****Hello and welcome to console Visma's book library *****");
           
@@ -46,6 +47,7 @@ namespace BookLibrary
                         string nameOfTheBook = Console.ReadLine();
                         library.TakeBook(user, nameOfTheBook, DateTime.Now);
                         goto case "0";
+
                     case "3":
                         Console.WriteLine("Which book you want to return?  Specify a name");
                         user.DisplayMyBooks();
@@ -56,33 +58,30 @@ namespace BookLibrary
                     case "filter /nam":
                         Console.WriteLine("Filtering by Name");
                         Console.WriteLine("Please provide a name");
-                        string fName = Console.ReadLine();
+                        string namName = Console.ReadLine();
                         Console.WriteLine();
-                        var IBooks = library.FilterByIsbn(fName);
-                        library.DisplayBooks(IBooks);
+                        var namBooks = library.FilterByIsbn(namName);
+                        library.DisplayBooks(namBooks);
                         goto case "0";
 
                     case "filter /isb":
                         Console.WriteLine("Filtering by ISBN");
                         Console.WriteLine("Please provide a ISBN number");
-                        string ISBN = Console.ReadLine();
+                        string isbName = Console.ReadLine();
                         Console.WriteLine();
-                        var books = library.FilterByIsbn(ISBN);
-                        library.DisplayBooks(books);
-
+                        var isbBooks = library.FilterByIsbn(isbName);
+                        library.DisplayBooks(isbBooks);
                         goto case "0";
 
                     case "filter /aut":
                         Console.WriteLine("Filtering by authors name");
                         Console.WriteLine("Please provide a authors name");
-                        string fAuth = Console.ReadLine();
+                        string autName = Console.ReadLine();
                         Console.WriteLine();
-                        library.FilterByName(fAuth);
-                        var aBooks = library.FilterByIsbn(fAuth);
-                        library.DisplayBooks(aBooks);
-
+                        library.FilterByName(autName);
+                        var autBooks = library.FilterByIsbn(autName);
+                        library.DisplayBooks(autBooks);
                         goto case "0";
-
 
                     case "q":
                         Console.WriteLine("you are quitting");
